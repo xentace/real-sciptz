@@ -30,12 +30,12 @@ loadingText.TextScaled = true
 loadingText.Font = Enum.Font.GothamBold
 loadingText.Parent = loadingFrame
 
--- FIXED Sailor Piece text (no collision)
+-- FIXED Rivals text (no collision)
 local smallText = Instance.new("TextLabel")
 smallText.Size = UDim2.new(1,0,0.05,0)
 smallText.Position = UDim2.new(0,0,0.60,0) -- moved lower
 smallText.BackgroundTransparency = 1
-smallText.Text = "Sailor Piece"
+smallText.Text = "Rivals"
 smallText.TextColor3 = Color3.fromRGB(150,150,150)
 smallText.TextScaled = false -- prevents stretching issues
 smallText.TextSize = 18 -- clean small size
